@@ -13,8 +13,6 @@
 
 #endif /* Vector_hpp */
 
-#define INIT_CAPACITY 8
-
 class Vector
 {
 public:
@@ -24,10 +22,16 @@ public:
     bool is_empty();
     int at(int index);
     void push(int value);
-    void insert(int index, int value);  
+    void insert(int index, int value);
+    void prepend(int value);
+    int pop();
+    void deleteAt(int index); // deleteAt instead of delete
+    int find(int value);
+    void remove(int value);
 protected:
-    int arrayCapacity = 8;
+    int arrayCapacity = 16;
     int * pointer;
     int arraySize = 0;
     void resize(int new_capacity);
+    bool isFull();
 };

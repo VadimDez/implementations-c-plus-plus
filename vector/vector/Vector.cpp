@@ -10,8 +10,7 @@
 #include <iostream>
 
 Vector::Vector() {
-    int array[this->arrayCapacity];
-    this->pointer = array;
+    this->pointer = new int [this->arrayCapacity];
 }
 
 // get number of items in vector
@@ -41,29 +40,107 @@ int Vector::at(int index) {
 // add item to the end of vector
 void Vector::push(int value) {
     // check if vector is full
-    if (this->size() == this->capacity()) {
+    if (this->isFull()) {
         this->resize(this->arrayCapacity * 2);
     }
     
-    int * p = this->pointer + this->size();
+    std::cout << "ARRAY AT IS : " << *(this->pointer) << "\n";
     
-    *p = value;
+    
+    *(this->pointer + this->size()) = value;
+    
     this->arraySize++;
 }
 
 // resize vector
 void Vector::resize(int new_capacity) {
-    this->arrayCapacity = this->arrayCapacity * 2;
-    int array[this->arrayCapacity];
+    this->arrayCapacity = new_capacity;
+    int * array = new int [this->arrayCapacity];
     
     // copy all items to bigger array
     for (int i = 0; i < this->size(); i++) {
-        array[i] = *(this->pointer + i);
+        *(array + i) = *(this->pointer + i);
     }
     
     this->pointer = array;
 }
 
+// insert value at index, shift everything after
 void Vector::insert(int index, int value) {
+    if (this->isFull()) {
+        this->resize(this->arrayCapacity * 2);
+    }
     
+    // increment size
+    this->arraySize++;
+    
+    int i = this->size();
+    
+    while (i > index) {
+        *(this->pointer + i) = *(this->pointer + i - 1);
+        i--;
+    }
+    
+    *(this->pointer + index) = value;
+}
+
+bool Vector::isFull() {
+    return this->size() == this->capacity();
+}
+
+void Vector::prepend(int value) {
+    this->insert(0, value);
+}
+
+int Vector::pop() {
+    int value = *(this->pointer + this->size() - 1);
+    
+    this->arraySize--;
+    
+    if (this->size() == this->capacity() / 4) {
+        this->resize(this->capacity() / 2);
+    }
+    
+    return value;
+}
+
+// delete item at index
+void Vector::deleteAt(int index) {
+    this->arraySize--;
+    int length = this->size();
+    
+    while (index < length) {
+        *(this->pointer + index) = *(this->pointer + index + 1);
+        index++;
+    }
+}
+
+// find item, return its index
+int Vector::find(int value) {
+    bool found = false;
+    int length = this->size();
+    int i = 0;
+    
+    while(i < length && !found) {
+        if (*(this->pointer + i) == value) {
+            found = true;
+            i--;
+        }
+        
+        i++;
+    }
+    
+    return found ? i : -1;
+}
+
+// remove all items with value
+void Vector::remove(int value) {
+    int i;
+    do {
+        i = this->find(value);
+        
+        if (i != -1) {
+            this->deleteAt(i);
+        }
+    } while (i != -1);
 }
