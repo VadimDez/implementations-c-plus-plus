@@ -29,5 +29,12 @@ int main(int argc, const char * argv[]) {
     std::cout << "Get value at index 0: " << l.value_at(0) << "\n";
     std::cout << "Get value at index 1: " << l.value_at(1) << "\n";
     
+    std::cout << "Get front: " << l.front() << "\n";
+    std::cout << "Get back: " << l.back() << "\n";
+    
+    
+    std::cout << "Pop back: " << l.pop_back() << "\n";
+    std::cout << "Size: " << l.size() << "\n";
+    
     return 0;
 }

@@ -29,6 +29,8 @@ public:
     int pop_front();
     void push_back(int value);
     int pop_back();
+    int front();
+    int back();
 protected:
     int itemsAmount = 0;
     Node * head;

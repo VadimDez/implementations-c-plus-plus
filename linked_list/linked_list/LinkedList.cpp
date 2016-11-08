@@ -93,17 +93,55 @@ void LinkedList::push_back(int value) {
 }
 
 // pop last item
-
 int LinkedList::pop_back() {
     if (this->empty()) {
         throw new std::exception ;//"Linked list is empty"
     }
     
     int i;
-    Node * node = this->head;
+    Node node = *this->head;
     
-    for (i = 0;i < this->size() - 1;i++) {
+    if (this->size() == 1) {
+        int value = node.value;
         
+        this->head = NULL;
+        
+        return value;
     }
     
+    for (i = 0;i < this->size() - 2;i++) {
+        node = *(node.next);
+    }
+    
+    int value = (*node.next).value;
+    
+    node.next = NULL;
+    
+    this->itemsAmount--;
+    
+    return value;
+}
+
+// get first value
+int LinkedList::front() {
+    if (this->empty()) {
+        throw new std::exception ;//"Linked list is empty"
+    }
+    
+    return (*this->head).value;
+}
+
+// get last value
+int LinkedList::back() {
+    if (this->empty()) {
+        throw new std::exception ;//"Linked list is empty"
+    }
+    
+    Node node = *(this->head);
+    
+    while (node.next != NULL) {
+        node = *(node.next);
+    }
+    
+    return node.value;
 }
