@@ -31,6 +31,7 @@ public:
     int pop_back();
     int front();
     int back();
+    void insert(int index, int value);
 protected:
     int itemsAmount = 0;
     Node * head;

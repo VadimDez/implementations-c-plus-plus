@@ -27,7 +27,7 @@ void LinkedList::push_front(int value) {
     (*newNode).value = value;
     
     if (!this->empty()) {
-        (*newNode).next = this->head->next;
+        (*newNode).next = this->head;
     } else {
         (*newNode).next = NULL;
     }
@@ -47,7 +47,7 @@ int LinkedList::value_at(int index) {
         throw std::out_of_range("Index out of bounds");
     }
     
-    struct Node node = *this->head;
+    Node node = *this->head;
     int i = 0;
     
     for (; i < index; i++) {
@@ -134,7 +134,7 @@ int LinkedList::front() {
 // get last value
 int LinkedList::back() {
     if (this->empty()) {
-        throw new std::exception ;//"Linked list is empty"
+        throw new std::exception;//"Linked list is empty"
     }
     
     Node node = *(this->head);
@@ -144,4 +144,20 @@ int LinkedList::back() {
     }
     
     return node.value;
+}
+
+// insert item at index
+void LinkedList::insert(int index, int value) {
+    if (index != 0 && index > this->size() - 1) {
+        throw std::out_of_range("Index out of bounds");
+    }
+    
+    Node *newNode = new Node;
+    (*newNode).value = value;
+    
+    if (this->empty()) {
+        this->head = newNode;
+    }
+    
+    this->itemsAmount++;
 }

@@ -9,6 +9,16 @@
 #include <iostream>
 #include "LinkedList.hpp"
 
+void printLinkedList(LinkedList &list) {
+    
+    std::cout << "List: ";
+    for (int i = 0;i < list.size(); i++) {
+        std::cout << list.value_at(i) << " ";
+    }
+    
+    std::cout << "\n";
+}
+
 int main(int argc, const char * argv[]) {
     
     LinkedList l = LinkedList();
@@ -17,17 +27,20 @@ int main(int argc, const char * argv[]) {
     
     std::cout << "Empty: " << l.empty() << "\n";
     
+    l.insert(0, 123);
+    printLinkedList(l);
+    
     l.push_front(1);
     
-    std::cout << "Get value at index 0: " << l.value_at(0) << "\n";
+    std::cout << "Size: " << l.size() << "\n";
+    printLinkedList(l);
     
     std::cout << "Pop front: " << l.pop_front() << "\n";
     std::cout << "Size: " << l.size() << "\n";
     
     l.push_back(0);
     l.push_back(1);
-    std::cout << "Get value at index 0: " << l.value_at(0) << "\n";
-    std::cout << "Get value at index 1: " << l.value_at(1) << "\n";
+    printLinkedList(l);
     
     std::cout << "Get front: " << l.front() << "\n";
     std::cout << "Get back: " << l.back() << "\n";
