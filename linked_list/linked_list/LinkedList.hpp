@@ -32,6 +32,8 @@ public:
     int front();
     int back();
     void insert(int index, int value);
+    void earse(int index);
+    int value_n_from_end(int n);
 protected:
     int itemsAmount = 0;
     Node * head;

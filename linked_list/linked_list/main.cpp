@@ -49,5 +49,29 @@ int main(int argc, const char * argv[]) {
     std::cout << "Pop back: " << l.pop_back() << "\n";
     std::cout << "Size: " << l.size() << "\n";
     
+    
+    std::cout << "Insert at index 0 value 100: \n";
+    printLinkedList(l);
+    l.insert(0, 100);
+    printLinkedList(l);
+    
+    std::cout << "Insert at index 1 value 101: \n";
+    l.insert(1, 101);
+    printLinkedList(l);
+    
+    std::cout << "Insert at index 3 value 103: \n";
+    l.insert(3, 103);
+    printLinkedList(l);
+    
+    std::cout << "Earse item at index 0: \n";
+    l.earse(0);
+    printLinkedList(l);
+    
+    std::cout << "Earse item at index 3: \n";
+    l.earse(3);
+    printLinkedList(l);
+    
+    std::cout << "Value n from end where n = 2: " << l.value_n_from_end(2) << "\n";
+    
     return 0;
 }

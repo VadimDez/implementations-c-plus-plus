@@ -99,10 +99,10 @@ int LinkedList::pop_back() {
     }
     
     int i;
-    Node node = *this->head;
+    Node * node = this->head;
     
     if (this->size() == 1) {
-        int value = node.value;
+        int value = (*node).value;
         
         this->head = NULL;
         
@@ -110,12 +110,12 @@ int LinkedList::pop_back() {
     }
     
     for (i = 0;i < this->size() - 2;i++) {
-        node = *(node.next);
+        node = (*node).next;
     }
     
-    int value = (*node.next).value;
+    int value = (*(*node).next).value;
     
-    node.next = NULL;
+    (*node).next = NULL;
     
     this->itemsAmount--;
     
@@ -148,7 +148,8 @@ int LinkedList::back() {
 
 // insert item at index
 void LinkedList::insert(int index, int value) {
-    if (index != 0 && index > this->size() - 1) {
+    // allow add at index 0 even if there's no elements
+    if (index != 0 && index >= this->size()) {
         throw std::out_of_range("Index out of bounds");
     }
     
@@ -157,7 +158,49 @@ void LinkedList::insert(int index, int value) {
     
     if (this->empty()) {
         this->head = newNode;
+    } else if (index == 0) {
+        (*newNode).next = this->head;
+        this->head = newNode;
+    } else {
+        Node *node = this->head;
+        for (int i = 0; i < index - 1; i++) {
+            node = (*node).next;
+        }
+        
+        (*newNode).next = (*node).next;
+        (*node).next = newNode;
     }
     
     this->itemsAmount++;
+}
+
+// remove node at given index
+void LinkedList::earse(int index) {
+    if (index >= this->size()) {
+        throw std::out_of_range("Index out of bounds");
+    }
+    
+    if (index == 0) {
+        this->head = (*this->head).next;
+    } else {
+        Node *node = this->head;
+        
+        for (int i = 0; i < index - 1; i++) {
+            node = (*node).next;
+        }
+        
+        (*node).next = (*(*node).next).next;
+    }
+    
+    this->itemsAmount--;
+}
+
+int LinkedList::value_n_from_end(int n) {
+    int index = this->size() - n;
+    
+    if (index < 0) {
+        throw std::out_of_range("Index out of bounds");
+    }
+    
+    return this->value_at(index);
 }
