@@ -34,6 +34,8 @@ public:
     void insert(int index, int value);
     void earse(int index);
     int value_n_from_end(int n);
+    void remove_value(int value);
+    void reverse();
 protected:
     int itemsAmount = 0;
     Node * head;

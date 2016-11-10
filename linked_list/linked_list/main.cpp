@@ -73,5 +73,10 @@ int main(int argc, const char * argv[]) {
     
     std::cout << "Value n from end where n = 2: " << l.value_n_from_end(2) << "\n";
     
+    
+    std::cout << "Remove valye: 123: \n";
+    l.remove_value(123);
+    printLinkedList(l);
+    
     return 0;
 }

@@ -204,3 +204,37 @@ int LinkedList::value_n_from_end(int n) {
     
     return this->value_at(index);
 }
+
+void LinkedList::remove_value(int value) {
+    bool found = false;
+    int i = 0;
+    Node *node = this->head;
+    
+    while (!found && i < this->size()) {
+        if ((*node).value == value) {
+            found = true;
+        } else {
+            node = (*node).next;
+            i++;
+        }
+    }
+    
+    if (found) {
+        this->earse(i);
+    }
+}
+
+void LinkedList::reverse() {
+    Node *node = this->head;
+    Node *next;
+    Node *tmp;
+    
+    for (int i = 0; i < this->size() - 2; i++) {
+        next = (*node).next;
+        tmp = (*next).next;
+        (*next).next = node;
+        node = tmp;
+    }
+    
+    this->head = node;
+}
