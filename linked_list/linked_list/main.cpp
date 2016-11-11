@@ -78,5 +78,22 @@ int main(int argc, const char * argv[]) {
     l.remove_value(123);
     printLinkedList(l);
     
+    
+    std::cout << "Reverse list: \n";
+    l.reverse();
+    printLinkedList(l);
+    
+    
+    std::cout << "Add few elements: \n";
+    l.push_back(1);
+    l.push_back(2);
+    l.push_back(3);
+    printLinkedList(l);
+    
+    
+    std::cout << "Reverse list: \n";
+    l.reverse();
+    printLinkedList(l);
+    
     return 0;
 }

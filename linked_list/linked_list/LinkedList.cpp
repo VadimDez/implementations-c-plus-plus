@@ -224,17 +224,26 @@ void LinkedList::remove_value(int value) {
     }
 }
 
+// Reverse list
 void LinkedList::reverse() {
-    Node *node = this->head;
+    Node *prev = this->head;
+    Node *current;
     Node *next;
-    Node *tmp;
     
-    for (int i = 0; i < this->size() - 2; i++) {
-        next = (*node).next;
-        tmp = (*next).next;
-        (*next).next = node;
-        node = tmp;
+    if (this->size() > 1) {
+        current = (*prev).next;
+        next = (*current).next;
+        
+        for (int i = 0; i < this->size() - 1; i++) {
+            (*current).next = prev;
+            prev = current;
+            if (next != NULL) {
+                current = next;
+                next = (*next).next;
+            }
+        }
+        
+        (*this->head).next = NULL;
+        this->head = current;
     }
-    
-    this->head = node;
 }
